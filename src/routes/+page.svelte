@@ -2,10 +2,12 @@
     import Authenticate from "../components/Authenticate.svelte";
     import Statlist from "../components/Statlist.svelte";
     import CharSelect from "../components/CharSelect.svelte";
+    import Status from "../components/Status.svelte";
 
     
     export let user = 'Anonymous';
     let selectedChar;
+    let selectedPanel = 'statList';
     let isAuth = true;
 
 </script>
@@ -15,18 +17,41 @@
     {#if !isAuth}
     <Authenticate bind:isAuth={isAuth}/>
     {:else}
+
     <div class="header">
         <p>Hello, <p1>{user}</p1>!</p>
         <button class="fa fa-sign-out fa_custom" on:click={()=>{isAuth=false}}></button>
     </div>
     
-    
     <div class="char-select">
         <CharSelect bind:selectedChar={selectedChar}/>
         <button class="button-62">Save changes</button>
     </div>    
-    <Statlist />
+    
+    <div class="nav-btns">
+        <button on:click={()=>{selectedPanel='statList'}}
+            class="nav-btn {selectedPanel=='statList' ? 'active' : 'not-active'}">
+            Stats</button>
+        <button on:click={()=>{selectedPanel='status'}}
+            class="nav-btn {selectedPanel=='status' ? 'active' : 'not-active'}">
+            Status</button>
+        <button on:click={()=>{selectedPanel='inventory'}}
+            class="nav-btn {selectedPanel=='inventory' ? 'active':'not-active'}">
+            Items & Spells</button>
+        <button on:click={()=>{selectedPanel='notes'}}
+            class="nav-btn {selectedPanel=='notes' ? 'active' : 'not-active'}">
+            Notes</button>
+    </div>
+
+    <div class="panel {selectedPanel=='statList'?'':'hidden'}">
+        <Statlist />
+    </div>
+    <div class="panel {selectedPanel=='status'?'':'hidden'}">
+        <Status />
+    </div>
     {/if}
+
+    
 </div>
 
 <style>
@@ -115,5 +140,31 @@
 
     .button-62:not([disabled]):hover {
     box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+    }
+
+    .nav-btns{
+        position: flex;
+        flex-direction: row;
+        justify-items: space-between;
+    }
+
+    .nav-btn {
+        border-radius: 5px;
+        font-variant : small-caps;
+        font-size: 1.27rem;
+        border:none;
+        padding:3px;
+    }
+
+    .not-active {
+        background-color: #d9d9d9;
+    }
+    .active {
+        background-color: #BABABA;
+        color:white;
+    }
+
+    .hidden {
+        display: none;
     }
 </style>
