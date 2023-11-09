@@ -46,6 +46,10 @@
         box-shadow: 0 0 10px #525252;
         border-radius: 5px;
         font-size: 1.5rem;
+<<<<<<< HEAD
+=======
+        font-variant : small-caps;
+>>>>>>> 4487791 (styles, panel navigation)
         padding: 10px;
         border-spacing: 10px;  
     }
