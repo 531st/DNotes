@@ -43,12 +43,10 @@
 
 <style>
     .status-container{
-        font-variant : small-caps;
-        min-width: 36vh;
         display: flex;
         flex-direction: row;
-        gap: 15px;
         justify-content: space-between;
+        gap: 15px;
     }   
 
     .hp-spell-col {
